@@ -22,7 +22,11 @@
   header{border-bottom:1px solid var(--border);background:rgba(14,16,19,.85);backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
   .header-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
   .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem;letter-spacing:-.02em}
-  .logo-mark{width:32px;height:32px;border-radius:9px;background:var(--yellow);display:grid;place-items:center;color:#111;font-weight:900}
+  .logo-mark{width:40px;height:40px;border-radius:10px;overflow:hidden;display:grid;place-items:center;color:#111;font-weight:900;flex-shrink:0}
+  .logo-mark img{width:100%;height:100%;object-fit:cover;display:block}
+  .logo-mark .logo-letter{display:none}
+  .logo-mark.fallback{background:var(--yellow)}
+  .logo-mark.fallback .logo-letter{display:block}
   .logo span{color:var(--yellow)}
 
   /* BUTTONS */
@@ -38,6 +42,9 @@
 
   .btn-download{background:var(--yellow);color:#111;box-shadow:0 6px 20px rgba(255,212,0,.22)}
   .btn-download:hover{background:var(--yellow-hover);transform:translateY(-2px);box-shadow:0 10px 26px rgba(255,212,0,.3)}
+
+  .btn-download:disabled{cursor:wait;transform:none;box-shadow:0 6px 20px rgba(255,212,0,.22)}
+  .btn-download:disabled:hover{background:var(--yellow);transform:none}
 
   .btn-telegram{background:var(--telegram);color:#fff;box-shadow:0 6px 20px rgba(42,171,238,.25)}
   .btn-telegram:hover{background:#3fb6f2;transform:translateY(-2px);box-shadow:0 10px 26px rgba(42,171,238,.35)}
@@ -119,8 +126,11 @@
 <header>
   <div class="wrap header-inner">
     <div class="logo">
-      <div class="logo-mark" style="background:none;padding:0;overflow:hidden;">
-  <img src="Logo/Picsart_26-09-29_16-41-21-345.jpg" alt="Logo" style="width:100%;height:100%;object-fit:cover;">
+      <div class="logo-mark" id="logoMark">
+        <!-- Make sure the "Logo" folder sits next to this file and the name matches exactly (case-sensitive) -->
+        <img src="https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/Picsart_26-09-29_16-41-21-345.jpg" alt="Logo"
+             onerror="this.style.display='none';document.getElementById('logoMark').classList.add('fallback');">
+        <span class="logo-letter">x</span>
       </div>
       xtes<span>sex</span>
     </div>
@@ -147,12 +157,12 @@
 
       <div class="actions">
         <!-- YELLOW DOWNLOAD BUTTON -->
-        <a class="btn btn-download" id="downloadBtn" href="#" download>
+        <button class="btn btn-download" id="downloadBtn" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M4 20h16"/>
           </svg>
-          Download
-        </a>
+          <span id="dlLabel">Download</span>
+        </button>
 
         <!-- CHANGE THIS TELEGRAM LINK (2 of 2) -->
         <a class="btn btn-telegram" href="https://t.me/+zUyPwTBdQcw2NWU0" target="_blank" rel="noopener">
@@ -200,14 +210,14 @@
 const MAIN_VIDEO = {
   title: "he took my viginity🥺",
   type:  "Video",
-  duration: "0:27",
+  duration: "2:27",
   
 
   // 👇 PASTE YOUR VIDEO LINK HERE 👇
   src:   "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/100101_1790882572279.mp4",
 
   // 👇 PASTE YOUR THUMBNAIL IMAGE LINK HERE 👇
-  thumb: "Thumb/Screenshot_20260930-081146_1.png"
+  thumb: "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/Screenshot_20260930-081146_1.png"
 };
 
 
@@ -218,30 +228,29 @@ const MAIN_VIDEO = {
 const SUGGESTIONS = [
 
   {
-    title: "first video 🥵🥵",
-    type:  "meme",
-    duration: "0:20",
+    title: "mia khalipha-she fucked a fan boy",
+    duration: "2:19",
 
-    src:   "Video/Dramatic Look_240p.mp4",   // 👈 YOUR VIDEO LINK
-    thumb: "Thumb/1790698707420.jpg"       // 👈 YOUR IMAGE LINK
+    src:   "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/100301_1791020147001.mp4",   // 👈 YOUR VIDEO LINK
+    thumb: "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/AI%20Ultra%20HD_044444db-97e3-33d7-aaaf-d71282531a5c.png"       // 👈 YOUR IMAGE LINK
   },
 
   {
-    title: "stuck leg",
-    type:  "meme",
-    duration: "0:19",
+    title: "what a pain",
+  
+    duration: "0:50",
 
-    src:   "Video/stuck leg.mp4",           // 👈 YOUR VIDEO LINK
-    thumb: "Thumb/guy.jpg"               // 👈 YOUR IMAGE LINK
+    src:   "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/100302_1791022616088.mp4",           // 👈 YOUR VIDEO LINK
+    thumb: "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/snapshot_1791022569615_040fd82f-f353-4b99-8d8f-f48a1da7080b.png"               // 👈 YOUR IMAGE LINK
   },
 
   {
     title: "Somewhere between falling and dreaming",
-    type:  "Sci-Fi",
-    duration: "0:15",
+    
+    duration: "1:00",
   
-    src:   "Video/Somewhere between falling and dreaming, I found this place🌌.mp4",     // 👈 YOUR VIDEO LINK
-    thumb : "Thumb/Screenshot_20260918-110057.png"         // 👈 YOUR IMAGE LINK
+    src:   "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/100303_1791027220791.mp4",     // 👈 YOUR VIDEO LINK
+    thumb : "https://pub-3dfc857e90964d85be53eb7dcc5c14fa.r2.dev/snapshot_1791027316933_5bcd48ca-2529-400d-a221-47882c4ef206.jpg"         // 👈 YOUR IMAGE LINK
   }
 
 ];
@@ -260,28 +269,43 @@ const grid        = document.getElementById('grid');
 const toast       = document.getElementById('toast');
 
 
-/* ---------- Build the 3 suggestion cards ---------- */
-SUGGESTIONS.forEach((v, i) => {
-  const card = document.createElement('article');
-  card.className = 'card';
-  card.innerHTML = `
-    <div class="thumb">
-      <img src="${v.thumb}" alt="${v.title}" loading="lazy" onerror="this.style.display='none'">
-      <span class="duration">${v.duration}</span>
-    </div>
-    <div class="card-body">
-      <div class="card-title">${v.title}</div>
-      <div class="card-sub">${v.type}${v.size ? " • " + v.size : ""}</div>
-    </div>`;
+/* ---------- State ---------- */
+let current     = MAIN_VIDEO;          // video playing in the big player
+let suggestions = [...SUGGESTIONS];    // videos shown in the bottom list
 
-  card.addEventListener('click', () => {
-    playVideo(v);
-    markActive(i);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+/* ---------- Build the suggestion cards ---------- */
+function renderSuggestions(){
+  grid.innerHTML = '';
+  suggestions.forEach(v => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="thumb">
+        <img src="${v.thumb}" alt="${v.title}" loading="lazy" onerror="this.style.display='none'">
+        <span class="duration">${v.duration}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${v.title}</div>
+        <div class="card-sub">${v.type}${v.size ? " • " + v.size : ""}</div>
+      </div>`;
+    card.addEventListener('click', () => switchTo(v));
+    grid.appendChild(card);
   });
+}
 
-  grid.appendChild(card);
-});
+
+/* ---------- Switch video: the old one goes back into the list at a random spot ---------- */
+function switchTo(v){
+  const previous = current;
+  suggestions = suggestions.filter(s => s !== v);                 // remove the clicked one
+  const pos = Math.floor(Math.random() * (suggestions.length + 1));
+  suggestions.splice(pos, 0, previous);                           // insert the old one randomly
+  current = v;
+  playVideo(v);
+  renderSuggestions();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 
 /* ---------- Load a video into the player ---------- */
@@ -293,33 +317,84 @@ function playVideo(v){
   titleEl.textContent = v.title;
   metaEl.textContent  = `${v.type} • ${v.duration}${v.size ? " • " + v.size : ""}`;
 
-  // Point the yellow Download button at this exact video
-  downloadBtn.href = v.src;
-  downloadBtn.setAttribute('download', v.title.replace(/\s+/g, '_') + '.mp4');
+  resetDownload();   // cancel any running countdown when the video changes
 
   document.title = v.title + ' — xtres';
 }
 
 
-/* ---------- Highlight the active card ---------- */
-function markActive(index){
-  [...grid.children].forEach((card, i) => {
-    card.classList.toggle('active', i === index);
-  });
+/* ---------- Download with a 6-second countdown ---------- */
+const COUNTDOWN_SECONDS = 10;                       // 👈 change the wait time here
+const dlLabel = document.getElementById('dlLabel');
+let toastTimer, countdownTimer, downloading = false;
+
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+function resetDownload(){
+  clearInterval(countdownTimer);
+  downloading = false;
+  downloadBtn.disabled = false;
+  dlLabel.textContent = 'Download';
+}
+
+downloadBtn.addEventListener('click', () => {
+  if (downloading) return;
+  downloading = true;
+  downloadBtn.disabled = true;
+
+  const target = current;                          // the video that was on screen when clicked
+  let left = COUNTDOWN_SECONDS;
+  dlLabel.textContent = `Download starts in ${left}s…`;
+
+  countdownTimer = setInterval(() => {
+    left--;
+    if (left > 0){
+      dlLabel.textContent = `Download starts in ${left}s…`;
+    } else {
+      clearInterval(countdownTimer);
+      dlLabel.textContent = 'Downloading…';
+      saveVideo(target).finally(() => { if (current === target) resetDownload(); });
+    }
+  }, 1000);
+});
+
+/* Fetch the file and save it as a blob so the browser downloads it
+   instead of opening/playing it. */
+async function saveVideo(v){
+  const name = (v.title.replace(/[^\p{L}\p{N} _-]+/gu, '').trim().replace(/\s+/g, '_') || 'video') + '.mp4';
+  showToast('Starting your download…');
+  try{
+    const res = await fetch(v.src);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    triggerSave(url, name, false);
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }catch(err){
+    // Host blocks direct fetching (CORS) → fall back to a normal link in a new tab
+    triggerSave(v.src, name, true);
+  }
+}
+
+function triggerSave(href, name, newTab){
+  const a = document.createElement('a');
+  a.href = href;
+  a.download = name;
+  if (newTab){ a.target = '_blank'; a.rel = 'noopener'; }
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
 
-/* ---------- Download toast ---------- */
-let toastTimer;
-downloadBtn.addEventListener('click', () => {
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-});
-
-
 /* ---------- Start with the main video ---------- */
+renderSuggestions();
 playVideo(MAIN_VIDEO);
 </script>
 </body>
-      </html>
+                                                     </html>
